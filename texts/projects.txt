@@ -1,0 +1,11 @@
+Project 1
+
+Take input from user if they are happy or sad and display the status in emoji
+
+Project 2
+
+take input and display if the nubmer is even or odd
+
+Project 3 
+
+take temp and invert the temp.
