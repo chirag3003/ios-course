@@ -48,9 +48,14 @@ func findMinMax(firstNum: Int, secondNum: Int) -> (max: Int, min: Int) {
 let (max, min) = findMinMax(firstNum: 5, secondNum: 4)
 print("Min = \(min), Max = \(max)")
 
-func dateTimeFormat(from date: Date) -> (year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int){
+func dateTimeFormat(from date: Date) -> (
+    year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int
+) {
     let calendar = Calendar.current
-    let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+    let components = calendar.dateComponents(
+        [.year, .month, .day, .hour, .minute, .second],
+        from: date
+    )
     return (
         year: components.year ?? 0,
         month: components.month ?? 0,
@@ -62,3 +67,48 @@ func dateTimeFormat(from date: Date) -> (year: Int, month: Int, day: Int, hour: 
 }
 
 print(dateTimeFormat(from: Date()))
+
+struct Toddler {
+    var name: String
+    var ageInMonths: Int
+    init?(name: String, monthsOld: Int) {
+        if monthsOld < 12 || monthsOld > 36 {
+            return nil
+        }
+        self.name = name
+        self.ageInMonths = monthsOld
+    }
+}
+
+print(Toddler(name: "Sanchita", monthsOld: 20)!)
+print(Toddler(name: "Chirag", monthsOld: 240))
+
+struct Person {
+    var age: Int
+    var residence: Residence?
+}
+
+struct Residence {
+    var address: Address?
+}
+
+struct Address {
+    var buildingNumber: Int?
+    var streetName: String?
+    var ApartmentName: Int?
+}
+
+let aPerson = Person(
+    age: 14,
+    residence: Residence(
+        address: Address(
+            buildingNumber: 4,
+            streetName: "Hello",
+            ApartmentName: 1
+        )
+    )
+)
+
+if let theResidence = aPerson.residence?.address?.buildingNumber {
+    print("He lives in \(theResidence) \n")
+}
