@@ -34,7 +34,6 @@ int main() {
     int completion_time[n];
     int gantt_chart[total_time];
     int current_process = -1;
-
     while (completed < n) {
         int shortest = -1;
         int min_remaining_time = INT_MAX;
@@ -69,7 +68,7 @@ int main() {
     printf("Gantt Chart:\n|");
     for (int i = 0; i < total_time; i++) {
         if (i > 0 && gantt_chart[i] != gantt_chart[i - 1]) {
-            printf("|");
+            printf("| ");
         }
         if (gantt_chart[i] == -1) {
             printf(" IDLE ");
@@ -81,8 +80,13 @@ int main() {
 
     printf("0");
     for (int i = 1; i <= total_time; i++) {
-        if (i == total_time || gantt_chart[i] != gantt_chart[i - 1]) {
-            printf(" %d", i);
+        if (i > 0 && gantt_chart[i] != gantt_chart[i - 1]) {
+            printf(" %d ", i);
+        }
+        if (gantt_chart[i] == -1) {
+            printf("      ");
+        } else {
+            printf("    ");
         }
     }
     printf("\n");
