@@ -11,12 +11,12 @@ int main() {
   printf("Enter the number of references: ");
   scanf("%d", &nReferences);
   int frames[nFrames];
-  int lastUsed[nFrames];
+  int lastChanged[nFrames];
   int pageFaults = 0;
 
   for(int i = 0 ; i < nFrames; i++){
     frames[i] = -1;
-    lastUsed[i] = -1;
+    lastChanged[i] = -1;
   }
 
   for(int i = 0; i < nReferences; i++){
@@ -26,11 +26,10 @@ int main() {
     
     int indexToChange = 0;
     for(int j = 0 ; j < nFrames; j++){
-      if(lastUsed[j] < lastUsed[indexToChange]){
+      if(lastChanged[j] < lastChanged[indexToChange]){
         indexToChange = j;
       }
       if(frame == frames[j]){
-        lastUsed[j]=i;
         indexToChange = -1;
         break;
         printf("Frame %d is already in use\n", frame);
@@ -41,7 +40,7 @@ int main() {
     // If the frame is not in use, then add it to the list
     if(indexToChange != -1){
       frames[indexToChange] = frame;
-      lastUsed[indexToChange] = i;
+      lastChanged[indexToChange] = i;
       pageFault = 1;
     }
     printFrames(frames, nFrames, pageFault);
